@@ -4,6 +4,9 @@
 - remove : 파일 삭제
 - rename : 파일 및 폴더 이름 변경
 - comment : 주석 추가 및 변경
+- refactor : 코드 리펙터링
+- docs : 문서 수정
+- fix : 버그 수정
 - HOTFIX : 급하게 치명적인 버그 수정
 
 
