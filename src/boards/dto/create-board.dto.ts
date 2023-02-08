@@ -1,7 +1,7 @@
 // import { IsString } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty } from 'class-validator';
-import { BoardStatus } from '../boards.model';
+import { BoardStatus } from '../board.model';
 
 export class CreateBoardDto {
   @IsNotEmpty()

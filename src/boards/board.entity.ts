@@ -1,5 +1,5 @@
 import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
-import { BoardStatus } from "./boards.model";
+import { BoardStatus } from "./board.model";
 
 @Entity() //Entity() 데코레이터 클래스는 Board 클래스가 엔티티임을 나타내는 데
 // 사용된다. CREATE TABLE board 부분이다.
