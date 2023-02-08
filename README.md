@@ -1,3 +1,13 @@
+# git commit message 규칙
+- feat : 새로운 기능 추가에 관한 모든 사항
+- update : 버그 없는 기능에 한한 업데이트
+- remove : 파일 삭제
+- rename : 파일 및 폴더 이름 변경
+- comment : 주석 추가 및 변경
+- HOTFIX : 급하게 치명적인 버그 수정
+
+
+
 <p align="center">
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
 </p>
