@@ -1,0 +1,44 @@
+version: '3.7'
+
+services:
+  kiip_db:
+    container_name: nestjs-board-app_db
+    image: postgres
+    # build:
+    #   context: .
+    #   dockerfile: Dockerfile.postgres
+    environment:
+      # LANG: ko_KR.utf8
+      # LC_COLLATE: ko_KR.utf8
+      POSTGRES_INITDB_ARGS: --data-checksums
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_DB: postgres
+    expose:
+      - '5432'
+    ports:
+      - '5433:5432'
+    # volumes:
+    #   - ./data/pgdata:/var/lib/postgresql/data
+
+  # kiip_pgadmin:
+  #   container_name: skiip_pgadmin
+  #   image: dpage/pgadmin4
+  #   environment:
+  #     PGADMIN_DEFAULT_EMAIL: 'kiip@kiip.care'
+  #     PGADMIN_DEFAULT_PASSWORD: 'Skiip0711!!'
+  #   volumes:
+  #     - ./servers.json:/pgadmin4/servers.json # preconfigured servers/connections
+  #     - ./pgpass:/pgadmin4/pgpass # passwords for the connections in this file
+  #   expose:
+  #     - '5555'
+  #   ports:
+  #     - '5555:80'
+  #   entrypoint: >
+  #     /bin/sh -c "
+  #     mkdir -m 700 /var/lib/pgadmin/storage/kiip_kiip.care;
+  #     chown -R pgadmin:pgadmin /var/lib/pgadmin/storage/kiip_kiip.care;
+  #     cp -prv /pgadmin4/pgpass /var/lib/pgadmin/storage/kiip_kiip.care/;
+  #     chmod 600 /var/lib/pgadmin/storage/kiip_kiip.care/pgpass;
+  #     /entrypoint.sh
+  #     "
