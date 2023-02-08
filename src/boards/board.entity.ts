@@ -6,7 +6,7 @@ import { BoardStatus } from "./board-status.enum";
 export class Board extends BaseEntity {
     @PrimaryGeneratedColumn() // PrimaryGeneratedColumn() 데코레이터 클래스는
     // id 열이 Board 엔티티의 기본 키 열임을 나타내는 데 사용된다.
-    id:number;
+    id: number;
 
     @Column() // Column() 데코레이터 클래스는 Board 엔티티의
     //title 및 description과 같은 다른 열을 나타내는 데 사용된다.

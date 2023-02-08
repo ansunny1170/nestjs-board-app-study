@@ -6,10 +6,17 @@ import { UpdateBoardDto } from './dto/update-board.dto'
 import { BoardStatusValidationPipe } from './pipes/board-status-validation.pipe';
 
 import { ApiBody, ApiResponse, ApiOkResponse, ApiUnauthorizedResponse } from '@nestjs/swagger';
+import { Board } from './board.entity';
 
 @Controller('boards')
 export class BoardsController {
     constructor(private boardsService: BoardsService) {}
+
+    @Get('/:id')
+    getBoardById(@Param('id') id:number) : Promise<Board> {
+        return this.boardsService.getBoardById(id);
+    }
+
     // @Get()
     // @ApiResponse({
     //     description: '회원가입 API'
