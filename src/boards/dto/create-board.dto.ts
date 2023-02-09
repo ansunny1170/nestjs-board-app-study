@@ -5,15 +5,15 @@ import { BoardStatus } from '../board-status.enum';
 
 export class CreateBoardDto {
   @IsNotEmpty()
-  @ApiProperty({ description: '타이틀', example: '타이틀' })
+  @ApiProperty({ description: '타이틀', example: 'title' })
   title: string;
   
   @IsNotEmpty()
-  @ApiProperty({ description: '설명', example: '이건 설명이에요.' })
+  @ApiProperty({ description: '설명', example: 'descriptions' })
   description: string;
 
-  @ApiProperty({ description: '설명', example: 'PUBLIC' })
-  status: BoardStatus;
+  // @ApiProperty({ description: '설명', example: 'PUBLIC' })
+  // status: BoardStatus;
 
   
 }

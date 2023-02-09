@@ -1,6 +1,6 @@
-import { TypeOrmModule } from "@nestjs/typeorm";
+import { TypeOrmModuleOptions } from "@nestjs/typeorm";
 
-export const typeORMConfig : TypeOrmModule = {
+export const typeORMConfig : TypeOrmModuleOptions = {
     type: 'postgres',
     host: 'localhost',
     port: 5433,
