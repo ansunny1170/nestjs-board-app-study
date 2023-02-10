@@ -8,6 +8,8 @@ import { BoardStatusValidationPipe } from './pipes/board-status-validation.pipe'
 import { ApiBody, ApiResponse, ApiOkResponse, ApiUnauthorizedResponse } from '@nestjs/swagger';
 import { Board } from './board.entity';
 import { AuthGuard } from '@nestjs/passport';
+import { GetUser } from 'src/auth/get-user.decorator';
+import { User } from 'src/auth/user.entity';
 
 @Controller('boards')
 @UseGuards(AuthGuard()) // 컨트롤러 레벨에서 적용되는 미들웨어
@@ -16,8 +18,10 @@ export class BoardsController {
 
     @Post()
     @UsePipes(ValidationPipe)
-    createBoard(@Body() createBoardDto: CreateBoardDto): Promise<Board> {
-        return this.boardsService.createBoard(createBoardDto)
+    createBoard(
+        @Body() createBoardDto: CreateBoardDto,
+        @GetUser() user: User): Promise<Board> {
+        return this.boardsService.createBoard(createBoardDto, user)
     }
 
     @Get('/:id')
