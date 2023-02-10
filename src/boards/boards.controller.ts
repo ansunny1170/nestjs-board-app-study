@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Logger, Param, ParseIntPipe, Patch, Post, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
 import { BoardsService } from './boards.service';
 import { BoardStatus } from './board-status.enum'
 import { CreateBoardDto } from './dto/create-board.dto'
@@ -14,10 +14,12 @@ import { User } from 'src/auth/user.entity';
 @Controller('boards')
 @UseGuards(AuthGuard()) // 컨트롤러 레벨에서 적용되는 미들웨어
 export class BoardsController {
+    private logger = new Logger('BoardsController')
     constructor(private boardsService: BoardsService) {}
 
     @Get()
     getAllBoard(@GetUser() user: User): Promise<Board[]> {
+        this.logger.verbose(`user ${user.username} trying to get all boards`)
         return this.boardsService.getAllBoard(user);
     }
 
@@ -31,8 +33,9 @@ export class BoardsController {
     createBoard(
         @Body() createBoardDto: CreateBoardDto,
         @GetUser() user: User): Promise<Board> {
-        return this.boardsService.createBoard(createBoardDto, user)
-    }
+            this.logger.verbose(`user ${user.username} trying to create board. payload: ${JSON.stringify(createBoardDto)}`)
+            return this.boardsService.createBoard(createBoardDto, user)
+        }
 
     @Get('/:id')
     getBoardById(@Param('id') id:number) : Promise<Board> {
@@ -43,6 +46,14 @@ export class BoardsController {
     deleteBoard(@Param('id', ParseIntPipe) id:number): Promise<void> {
         return this.boardsService.deleteBoard(id);
     }
+    // 유저는 자신이 만든 게시물만 지울 수 있는 api
+    // @Delete('/:id')
+    // deleteMyBoard(
+    //     @Param('id', ParseIntPipe) id:number,
+    //     @GetUser() user: User
+    //     ): Promise<void> {
+    //     return this.boardsService.deleteBoard(id, user);
+    // }
 
     @Patch('/:id/status')
     @ApiBody({ type: UpdateBoardDto })

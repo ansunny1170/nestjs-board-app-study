@@ -15,6 +15,23 @@ export class BoardsService {
         private boardRepository: BoardRepository,
     ) {}
 
+    async getAllBoard(user: User): Promise<Board[]> {
+        // 내가 궁굼한 것은 아래 query의 어디에서 select 구문인지 어떻게 아나?
+        // createQueryBuilder 자체가 select 기능 전용인 것인가?
+        // 내 생각은 createQueryBuilder 뒤에 insert나 update가 없다면 default로 select 메소드다.
+        const query = this.boardRepository.createQueryBuilder('board') // board 테이블에서
+
+        query.where('board.userId = :userId', { userId: user.id }); // userId컬럼이 user.id값인 그 raw
+
+        const boards = await query.getMany()
+
+        return boards;
+     }
+
+    getBoardList(): Promise<Board[]> {
+        return this.boardRepository.find();
+    }
+
     createBoard(createBoardDto: CreateBoardDto, user: User): Promise<Board> {
         // 아래 내용은 repository.ts 로 옮김
         // const { title, description } = createBoardDto;
@@ -52,6 +69,16 @@ export class BoardsService {
             throw new NotFoundException(`Can't find board with id ${id}`)
         }
     }
+    // async deleteMyBoard(id: number, user: User): Promise<void> {
+    //     // const result = await this.boardRepository.delete({id, user});
+    //     const query = await this.boardRepository.createQueryBuilder('board')
+
+    //     query.where()
+
+    //     if(result.affected === 0) {
+    //         throw new NotFoundException(`Can't find board with id ${id}`)
+    //     }
+    // }
 
     async updateBoardStatus(id: number, status: BoardStatus): Promise<Board> {
         const board = await this.getBoardById(id);
@@ -62,22 +89,7 @@ export class BoardsService {
 
         return board;
     }
-    async getAllBoard(user: User): Promise<Board[]> {
-        // 내가 궁굼한 것은 아래 query의 어디에서 select 구문인지 어떻게 아나?
-        // createQueryBuilder 자체가 select 기능 전용인 것인가?
-        // 내 생각은 createQueryBuilder 뒤에 insert나 update가 없다면 default로 select 메소드다.
-        const query = this.boardRepository.createQueryBuilder('board') // board 테이블에서
 
-        query.where('board.userId = :userId', { userId: user.id }); // userId컬럼이 user.id값인 그 raw
-
-        const boards = await query.getMany()
-
-        return boards;
-     }
-
-     getBoardList(): Promise<Board[]> {
-        return this.boardRepository.find();
-     }
 
     // private boards : Board[] = [];
     // getAllBoards(): Board[] {
