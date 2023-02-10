@@ -1,7 +1,7 @@
 import { Injectable, UnauthorizedException } from "@nestjs/common";
 import { PassportStrategy } from "@nestjs/passport";
 import { ExtractJwt, Strategy } from "passport-jwt";
-import { User } from "./auth.entity";
+import { User } from "./user.entity";
 import { UserRepository } from "./auth.repository";
 
 // 다른 곳에서도 주입을 해서 사용 할 수 있게 하는 데코레이터

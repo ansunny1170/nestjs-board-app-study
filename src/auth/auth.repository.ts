@@ -1,7 +1,7 @@
 import { ConflictException, InternalServerErrorException } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { DataSource, Repository } from "typeorm";
-import { User } from "./auth.entity";
+import { User } from "./user.entity";
 import { AuthCredentialDto } from "./dto/auth-credential.dto";
 import * as bcrypt from 'bcryptjs'
 
