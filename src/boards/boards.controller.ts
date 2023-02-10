@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
 import { BoardsService } from './boards.service';
 import { BoardStatus } from './board-status.enum'
 import { CreateBoardDto } from './dto/create-board.dto'
@@ -7,8 +7,10 @@ import { BoardStatusValidationPipe } from './pipes/board-status-validation.pipe'
 
 import { ApiBody, ApiResponse, ApiOkResponse, ApiUnauthorizedResponse } from '@nestjs/swagger';
 import { Board } from './board.entity';
+import { AuthGuard } from '@nestjs/passport';
 
 @Controller('boards')
+@UseGuards(AuthGuard()) // 컨트롤러 레벨에서 적용되는 미들웨어
 export class BoardsController {
     constructor(private boardsService: BoardsService) {}
 
