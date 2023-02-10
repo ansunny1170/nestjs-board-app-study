@@ -5,7 +5,7 @@ export class AuthCredentialDto {
     @IsNotEmpty()
     @MinLength(3)
     @MaxLength(20)
-    @ApiProperty({ description: 'username', example: 'kyc' })
+    @ApiProperty({ description: 'username', example: 'kyc1' })
     username: string;
 
     @IsNotEmpty()
@@ -14,6 +14,6 @@ export class AuthCredentialDto {
     @Matches(/^[a-zA-Z0-9]*$/, {
         message: 'password only accepts english and number'
     })
-    @ApiProperty({ description: 'password', example: '' })
+    @ApiProperty({ description: 'password', example: '1234' })
     password: string;
 }
