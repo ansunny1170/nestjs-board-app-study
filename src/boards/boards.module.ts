@@ -7,6 +7,7 @@ import { BoardsService } from './boards.service';
 
 @Module({
   imports: [
+    // TypeOrmModule.forFeature([BoardRepository])
     TypeOrmModule.forFeature([Board])
   ],
   // exports: [TypeOrmModule],
