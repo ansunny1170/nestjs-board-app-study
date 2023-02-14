@@ -1,0 +1,10 @@
+server:
+  port: 3001
+
+db:
+  type: 'postgres'
+  port: 5433
+  database: 'postgres'
+
+jwt:
+  expriesIn: 3600
